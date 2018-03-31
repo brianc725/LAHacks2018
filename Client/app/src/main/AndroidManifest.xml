@@ -21,6 +21,8 @@
             android:exported="true" />
         <activity android:name=".UploadActivity"
             android:exported="true"></activity>
+        <activity android:name=".ImageActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>
