@@ -34,8 +34,6 @@ public class HomeActivity extends AppCompatActivity {
             "http://i.imgur.com/zuG2bGQ.jpg"
     };
 
-    private boolean checkLobby;
-
     public void updateImageUI() {
         Intent intent = new Intent(this, ImageActivity.class);
         intent.putExtra("mUrl", mUrls);
