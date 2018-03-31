@@ -1,5 +1,6 @@
 package com.company.lahacks.lahacks2018;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
        // updateUI(currentUser);
     }
 
+    public void updateUI() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
     public void signIn(View view) {
         if (!getEntries()) {
             Toast.makeText(MainActivity.this, "Email or password cannot be empty!",
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -69,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Successfully logged in.",
                                     Toast.LENGTH_SHORT).show();
+                           updateUI();
                          //   updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -81,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // ...
                     }
+
                 });
 
     }
@@ -101,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Authentication succeeded.",
                                     Toast.LENGTH_SHORT).show();
+                            updateUI();
                          //   updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
