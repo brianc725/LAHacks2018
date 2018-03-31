@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
+=======
+>>>>>>> 309cef8f54bf305b5b04314ddc64ac69a98ff0f5
 const functions = require('firebase-functions');
 
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
+<<<<<<< HEAD
 /*
 // Take the text parameter passed to this HTTP endpoint and insert it into the
 // Realtime Database under the path /messages/:pushId/original
@@ -39,3 +43,12 @@ data = "asdf";
 exports.addMessage = functions.https.onCall((data, context) => {
 	// ...
     });
+=======
+exports.addParty = functions.https.onRequest((req, res) =>{
+	const original = req.query.text;
+
+	return admin.database().ref('/partyid').push({id: original})(.then((snapshot) =>{
+		return res.redirect(303, snapshot.ref);
+	});
+});
+>>>>>>> 309cef8f54bf305b5b04314ddc64ac69a98ff0f5
