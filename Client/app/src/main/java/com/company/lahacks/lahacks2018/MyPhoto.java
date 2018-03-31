@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class MyPhoto implements Parcelable {
 
-    private static String mUrl;
+    private String mUrl;
     private String mTitle;
 
     public MyPhoto(String url, String title) {
@@ -30,7 +30,7 @@ public class MyPhoto implements Parcelable {
         }
     };
 
-    public static String getUrl() {
+    public String getUrl() {
         return mUrl;
     }
 

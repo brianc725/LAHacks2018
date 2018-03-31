@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/btn_show_gallery"
-        android:text="Show Gallery"
+        android:text="Click on the photos that look yummy!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
