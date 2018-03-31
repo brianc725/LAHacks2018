@@ -68,10 +68,28 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        String partyName = lobby.getText().toString();
-        myRef.child(partyName).setValue(partyName);
+        
+        final String partyName = lobby.getText().toString();
 
-        updateImageUI();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                if(map.containsValue(partyName)) {
+                    Toast.makeText(HomeActivity.this, "Sorry, that lobby already exists!",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    myRef.child(partyName).setValue(partyName);
+                    updateImageUI();
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void joinParty(View view){
