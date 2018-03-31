@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class UploadActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
-    Uri imageUri;
+    Uri imageUri = null;
 
     private ImageView imageView;
 
@@ -40,13 +41,18 @@ public class UploadActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
-            //get the bitmap image here instead of URI
             imageView.setImageURI(imageUri);
         }
     }
 
     public void uploadImage(View view) {
+        if (imageUri == null) {
+            Toast.makeText(UploadActivity.this, "Cannot upload without selecting image.",
+                    Toast.LENGTH_SHORT).show();
+        }
 
+
+        //TODO: after uploading the image set imageURI back to null and clear imageview
     }
 
 
