@@ -30,12 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void getEntries() {
+    public boolean getEntries() {
         EditText user = (EditText) findViewById(R.id.et_username);
         email = user.getText().toString();
 
         EditText pw = (EditText) findViewById(R.id.et_password);
         password = pw.getText().toString();
+
+        if (email.equals("") || password.equals("")) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -47,7 +53,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
-        getEntries();
+        if (!getEntries()) {
+            Toast.makeText(MainActivity.this, "Email or password cannot be empty!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -64,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            EditText pw = (EditText) findViewById(R.id.et_password);
+                            pw.setText("");
                           //  updateUI(null);
                         }
 
@@ -74,7 +86,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createAccount(View view) {
-        getEntries();
+        if (!getEntries()) {
+            Toast.makeText(MainActivity.this, "Email or password cannot be empty!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -90,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            EditText pw = (EditText) findViewById(R.id.et_password);
+                            pw.setText("");
                            // updateUI(null);
                         }
 
