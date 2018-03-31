@@ -20,6 +20,7 @@ public class ImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent galleryIntent = new Intent(ImageActivity.this, GalleryActivity.class);
+                galleryIntent.putExtra("mUrls",getIntent().getExtras().getStringArray("mUrl"));
                 startActivity(galleryIntent);
             }
         });

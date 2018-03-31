@@ -14,8 +14,14 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 public class GalleryActivity extends AppCompatActivity {
+
+    private String[] mUrls;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle extras = getIntent().getExtras();
+        mUrls = extras.getStringArray("mUrls");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
@@ -24,7 +30,7 @@ public class GalleryActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        GalleryActivity.ImageGalleryAdapter adapter = new GalleryActivity.ImageGalleryAdapter(this, MyPhoto.getPhotos());
+        GalleryActivity.ImageGalleryAdapter adapter = new GalleryActivity.ImageGalleryAdapter(this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -87,12 +93,15 @@ public class GalleryActivity extends AppCompatActivity {
             }
         }
 
-        private MyPhoto[] mPhotos;
+        private MyPhoto[] mPhotos = new MyPhoto[6];
         private Context mContext;
 
-        public ImageGalleryAdapter(Context context, MyPhoto[] photos) {
+        public ImageGalleryAdapter(Context context) {
             mContext = context;
-            mPhotos = photos;
+
+            for (int i = 0; i < 6; i++) {
+                mPhotos[i] = new MyPhoto(mUrls[i]);
+            }
         }
     }
 }

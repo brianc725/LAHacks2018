@@ -19,9 +19,18 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference();
 
     private EditText lobby;
+    private String[] mUrls = {
+            "http://i.imgur.com/zuG2bGQ.jpg",
+            "http://i.imgur.com/zuG2bGQ.jpg",
+            "http://i.imgur.com/zuG2bGQ.jpg",
+            "http://i.imgur.com/zuG2bGQ.jpg",
+            "http://i.imgur.com/zuG2bGQ.jpg",
+            "http://i.imgur.com/zuG2bGQ.jpg"
+    };
 
     public void updateImageUI() {
         Intent intent = new Intent(this, ImageActivity.class);
+        intent.putExtra("mUrl", mUrls);
         startActivity(intent);
     }
 
