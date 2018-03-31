@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "crafty-almanac-195516",
+  "private_key_id": "5e23681086e94758a3098b35b9c95e9a250dde64",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDAbXx5cVTpemS9\nUv3yd7+MqCCCNycWHt/q/0cQez8iqtCuWM6IwZizgu5yyRZlCXetL2RUYmhRWHo4\nCHp7WP/rzpcY3tdXWl3+jH26iekKVEEND1qxWZ4pSI+WeG+okaFL6jYP9OaTsNRT\n8T3UULlcXef8HNHvzaZ4Czq/eunYcNrMLNrxdJEa44nGd81qPOA+tawU7DtIyXq+\nQtMONowcNJd7isOLrqBgj5mwsFKLeqj0pLxInq2/ugqym2pUbzXYLxgi7Tew3Qh4\nDGbXNRixzm/h9PtrWh6LbucaISgKSQNz3G6z4EGWboyeC0HVnc8WMA8xYVS8JGuD\nghx0zZQjAgMBAAECggEAOD2nxEzZ7vVtTSJdA4l5TDB1c+mPvHjgpCvhRtFmxgib\nvmFJWBIRQeIyNA1OxNAMEOuJjNpIOAI+knLz7Wo5Pl/erI+w66CHWVcRhjw5huHS\nM3F55dzWC6XgBbAEnoWV2XzGOUqwO5lSrYgUNKI1UuhFXdvEhiyai3povL89apsr\nbI4v8EJ08hSB7/Ny+dAV05miwIsyOVASrez5lfHSwLcc8yF4ZuYB15JxL05osswt\n5MjmwK0kARyWTJRhtq5jlhl+wsxd648NDg/Iy3Oe2+DFJXn0i50GBKh1UtMvV3AU\nOTy/CYncjs5EYK7v1qpw0HzZaRSDxDqggg0hjaAvwQKBgQDszWYVX6urquMwQGwf\nIS/vGlFCvEtkc7LLh12rGRBh1JB6Fcz97VImNXC3I9zMUJ5PHbv/XiERv1vAw4qB\nx4iV2UsczdtW0YglxsZi/dBPG20FFFmdEgSMSWmHAkfbmQ0bkTQ1nH2ms1Du17ei\nNIK24mxYKMW9j5E4yrb099wwwQKBgQDQByKAp03GarWeeWdiwZa2mCI5KbfBsFZq\nYnny03vdmP0tUY31TM1xFET1W6e4cIJvcBTeYzmQ0y4VGYmhbXwtAo7jfezJn/0Q\nAv739TbOxDGtVLLzaG+QgubX34xylZuhaFBzi8u0xeAZ9oevx5EMM44fZuKxxGjZ\nEt17oyuZ4wKBgA0zAb6tP39pHhLBdIVjry1PtTnYDwfBXzTzDaiM1Bnv5EG511xM\nDyksD2VV7WfCEqDsUl9Qmt1HYlDjVWQYgCeCHiqz2scDFOiuJL690Q+nwrLmyHv1\n1iUPrn8lBGZcKJvhwxw95c8V7avygDzdWm/hPRLI6wS+7ORSgFI1QqPBAoGAe2qQ\nNKWNRdcPEwrRpExXvtJ5E1LFuvqD+i+cS8zeIrTeF2HYB5zeEWVGGA6dbZYKPFTR\nfLJ/d4ViRJBXD9dloUpwPVT7Aw+Q0kwEulTXhEnvcvbaCACAl8qha5cruts5bsP1\nXuekHgZ7Eswo6cdLLWL0wXqHqZFt5sMDdZNzjaMCgYBlZSFoakrYyDsXtiLK4mex\nr8WRP7Lg0ujX+h+a60GzDJKLu07odM0Hf5HA9/86vNALCzgYmvMvaBbx28DvDktG\nOR+I/LF2Cf2v4U8JBJ/6PWbZxcSTnFZKcsrbX14CdFr38FzT0KtCULNBPDXBy9Za\nLyJqynzhc74v8dNBMiG+kA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "lahacks2018jeffrey@crafty-almanac-195516.iam.gserviceaccount.com",
+  "client_id": "103776533229599385162",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lahacks2018jeffrey%40crafty-almanac-195516.iam.gserviceaccount.com"
+}
