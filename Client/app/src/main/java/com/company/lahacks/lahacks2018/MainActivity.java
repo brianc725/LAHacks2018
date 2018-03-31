@@ -15,15 +15,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-<<<<<<< HEAD
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-=======
 import com.google.firebase.functions.FirebaseFunctions;
->>>>>>> 309cef8f54bf305b5b04314ddc64ac69a98ff0f5
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String email;
     private String password;
-<<<<<<< HEAD
     private static final String TAG = "MainActivity";
 
 
@@ -39,9 +35,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("partyid");
 
-=======
     private FirebaseFunctions mFunctions;
->>>>>>> 309cef8f54bf305b5b04314ddc64ac69a98ff0f5
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-<<<<<<< HEAD
 
         myRef.setValue("Hello, World, this is Jeff!");
 
@@ -71,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-=======
->>>>>>> 309cef8f54bf305b5b04314ddc64ac69a98ff0f5
     }
 
     public boolean getEntries() {
@@ -170,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-<<<<<<< HEAD
 
 
 
@@ -180,10 +170,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-=======
     public void makeParty(){
         mFunctions = FirebaseFunctions.getInstance();
     }
->>>>>>> 309cef8f54bf305b5b04314ddc64ac69a98ff0f5
 }
 
