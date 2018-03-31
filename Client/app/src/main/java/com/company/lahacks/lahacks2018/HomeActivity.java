@@ -1,6 +1,9 @@
 package com.company.lahacks.lahacks2018;
 
+import android.view.View;
+
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +20,16 @@ public class HomeActivity extends AppCompatActivity {
 
     private EditText lobby;
 
+    public void updateImageUI() {
+        Intent intent = new Intent(this, ImageActivity.class);
+        startActivity(intent);
+    }
+
+    public void updateUploadUI() {
+        Intent intent = new Intent(this, UploadActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +39,15 @@ public class HomeActivity extends AppCompatActivity {
         lobby = (EditText) findViewById(R.id.et_lobby);
     }
 
-    public void addParty(View view) {
+    public boolean getLobbyName(){
+        String partyName = lobby.getText().toString();
+        if(partyName.equals(""))
+            return false;
+        return true;
+    }
+
+    public void createParty(View view) {
+
         if(!getLobbyName()){
             Toast.makeText(HomeActivity.this, "Lobby name cannot be empty!",
                     Toast.LENGTH_SHORT).show();
@@ -34,13 +55,15 @@ public class HomeActivity extends AppCompatActivity {
         }
         String partyName = lobby.getText().toString();
         myRef.child(partyName).setValue(partyName);
+        updateImageUI();
     }
 
-    public boolean getLobbyName(){
-        String partyName = lobby.getText().toString();
-        if(partyName.equals(""))
-            return false;
-        return true;
+    public void joinParty(View view) {
+        updateImageUI();
+    }
+
+    public void uploadImage(View view) {
+        updateUploadUI();
     }
 
 }

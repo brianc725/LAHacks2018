@@ -21,20 +21,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/bt_makeparty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="addParty"
-        android:text="Make Party"/>
+        <Button
+            android:id="@+id/bt_makeparty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="createParty"
+            android:text="Make Party" />
 
-    <Button
-        android:id="@+id/bt_joinparty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Join Party"/>
+        <Button
+            android:id="@+id/bt_joinparty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="joinParty"
+            android:text="Join Party" />
 
     </LinearLayout>
 
@@ -43,6 +44,7 @@
         android:id="@+id/bt_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit Image"/>
+        android:onClick="uploadImage"
+        android:text="Submit Image" />
 
 </LinearLayout>
