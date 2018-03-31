@@ -85,6 +85,10 @@ public class GalleryActivity extends AppCompatActivity {
                 if(position != RecyclerView.NO_POSITION) {
                     MyPhoto mPhoto = mPhotos[position];
 
+                    Glide.with(mContext)
+                            .load("https://upload.wikimedia.org/wikipedia/en/c/c7/Bonobos_Lana_%26_Kesi_2006_CALVIN_IMG_1301.JPG")
+//                    .placeholder(R.drawable.ic_cloud_off_red)
+                            .into(mPhotoImageView);
                     //later if time create PhotoActivity
 //                    Intent intent = new Intent(mContext, PhotoActivity.class);
 //                    intent.putExtra(PhotoActivity.EXTRA_SPACE_PHOTO, mPhoto);
