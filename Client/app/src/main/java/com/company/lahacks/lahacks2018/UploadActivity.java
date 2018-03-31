@@ -13,9 +13,10 @@ import android.widget.Toast;
 public class UploadActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
-    Uri imageUri = null;
-
+    private Uri imageUri = null;
     private ImageView imageView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
