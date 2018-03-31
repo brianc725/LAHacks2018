@@ -12,7 +12,7 @@
         android:id="@+id/et_lobby"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Lobbby Name"
+        android:hint="Lobby Name"
         />
 
 
@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:onClick="addParty"
         android:text="Make Party"/>
 
     <Button
