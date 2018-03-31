@@ -1,5 +1,6 @@
 package com.company.lahacks.lahacks2018;
 
+import android.util.Log;
 import android.view.View;
 
 import android.content.Intent;
@@ -10,8 +11,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -19,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference();
 
     private EditText lobby;
+    private boolean checkLobby;
 
     public void updateImageUI() {
         Intent intent = new Intent(this, ImageActivity.class);
@@ -48,19 +55,40 @@ public class HomeActivity extends AppCompatActivity {
 
     public void createParty(View view) {
 
-        if(!getLobbyName()){
+        if (!getLobbyName()) {
             Toast.makeText(HomeActivity.this, "Lobby name cannot be empty!",
                     Toast.LENGTH_SHORT).show();
             return;
         }
         String partyName = lobby.getText().toString();
         myRef.child(partyName).setValue(partyName);
+
         updateImageUI();
     }
 
-    public void joinParty(View view) {
-        updateImageUI();
+    public void joinParty(View view){
+        final String partyName = lobby.getText().toString();
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                if(map.containsValue(partyName)) {
+                    updateImageUI();
+                }else {
+                    Toast.makeText(HomeActivity.this, "That lobby doesn't exist!",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
+
 
     public void uploadImage(View view) {
         updateUploadUI();
