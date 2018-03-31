@@ -24,7 +24,6 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
 
-    private EditText lobby;
     private String[] mUrls = {
             "http://i.imgur.com/zuG2bGQ.jpg",
             "http://i.imgur.com/zuG2bGQ.jpg",
@@ -34,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
             "http://i.imgur.com/zuG2bGQ.jpg"
     };
 
+    private EditText lobby;
     private boolean checkLobby;
 
     public void updateImageUI() {
