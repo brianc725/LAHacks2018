@@ -15,6 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.functions.FirebaseFunctions;
 
 
@@ -23,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String email;
     private String password;
+    private static final String TAG = "MainActivity";
+
+
+    // Write a message to the database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("partyid");
+
     private FirebaseFunctions mFunctions;
 
     @Override
@@ -31,6 +43,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+
+        myRef.setValue("Hello, World, this is Jeff!");
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+
     }
 
     public boolean getEntries() {
@@ -128,7 +161,17 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+
+
+
+
+
+
+
+
+
     public void makeParty(){
         mFunctions = FirebaseFunctions.getInstance();
     }
 }
+
