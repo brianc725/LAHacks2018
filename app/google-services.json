@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "535701663474",
+    "firebase_url": "https://lahacks2018-d8418.firebaseio.com",
+    "project_id": "lahacks2018-d8418",
+    "storage_bucket": "lahacks2018-d8418.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535701663474:android:c0247a44b7dcb44e",
+        "android_client_info": {
+          "package_name": "com.company.lahacks.lahacks2018"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535701663474-glu32r577o72m7v5vts43ej79henlhip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDknO1zYFS6OBPasR_SXGkYzj9I-89xIic"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
