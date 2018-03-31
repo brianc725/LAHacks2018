@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<LinearLayout
+    android:id="@+id/buttons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_alignParentBottom="true">
+
+    <Button
+        android:id="@+id/bt_selectimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="chooseImage"
+        android:layout_weight="1"
+        android:text="Select Image" />
+
+    <Button
+        android:id="@+id/bt_uploadimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="uploadImage"
+        android:layout_weight="1"
+        android:text="Upload Image" />
+</LinearLayout>
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.company.lahacks.lahacks2018.UploadActivity">
+    android:layout_above="@id/buttons">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:id="@+id/iv_userimage"
+        />
+</ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
+
