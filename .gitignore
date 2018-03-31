@@ -8,3 +8,4 @@
 /Client/captures
 .externalNativeBuild
 /functions/node_modules
+/Client/.idea/caches/build_file_checksums.ser
