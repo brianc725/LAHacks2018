@@ -10,13 +10,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+
 public class UploadActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     private Uri imageUri = null;
     private ImageView imageView;
 
-
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,7 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload);
 
         imageView = findViewById(R.id.iv_userimage);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
     }
 
@@ -50,10 +55,18 @@ public class UploadActivity extends AppCompatActivity {
         if (imageUri == null) {
             Toast.makeText(UploadActivity.this, "Cannot upload without selecting image.",
                     Toast.LENGTH_SHORT).show();
+            return;
         }
 
+        //stores as 'photos/<filename>.jpg'
+        final StorageReference photoRef = mStorageRef.child("photos")
+                .child(imageUri.getLastPathSegment());
 
-        //TODO: after uploading the image set imageURI back to null and clear imageview
+        photoRef.putFile(imageUri);
+
+        //after uploading the image set imageURI back to null and clear imageview
+        imageUri = null;
+        imageView.setImageResource(android.R.color.transparent);
     }
 
 
