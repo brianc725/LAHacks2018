@@ -31,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private String email;
     private String password;
     private FirebaseFunctions mFunctions;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
