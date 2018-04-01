@@ -1,50 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:layout_margin="8dp"
     tools:context="com.company.lahacks.lahacks2018.HomeActivity">
 
-    <EditText
-        android:id="@+id/et_lobby"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="Lobby Name"
-        />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/bt_makeparty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="createParty"
-            android:text="Make Party" />
-
-        <Button
-            android:id="@+id/bt_joinparty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="joinParty"
-            android:text="Join Party" />
-
-    </LinearLayout>
-
+    <Button
+        android:id="@+id/bt_makeparty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="230dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="200dp"
+        android:onClick="createParty"
+        android:text="Make Party"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bt_joinparty"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/bt_image"
-        android:layout_width="match_parent"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:onClick="uploadImage"
-        android:text="Submit Image" />
+        android:text="Submit Image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="8dp" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/bt_joinparty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="230dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="200dp"
+        android:onClick="joinParty"
+        android:text="Join Party"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bt_makeparty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/et_lobby"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/alegreya_sans_sc_light"
+        android:hint="Lobby Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
