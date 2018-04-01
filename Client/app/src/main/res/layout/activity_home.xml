@@ -17,8 +17,10 @@
         android:layout_marginEnd="44dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="200dp"
+        android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="createParty"
         android:text="Make Party"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bt_joinparty"
@@ -30,8 +32,10 @@
         android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
+        android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="uploadImage"
         android:text="Submit Image"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="8dp" />
 
@@ -43,8 +47,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="200dp"
+        android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="joinParty"
         android:text="Join Party"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bt_makeparty"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,4 +69,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_coins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="You have   coins."
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_lobby"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.694" />
 </android.support.constraint.ConstraintLayout>

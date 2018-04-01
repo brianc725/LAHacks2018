@@ -26,14 +26,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:fontFamily="@font/alegreya_sans_sc_light"
                 android:text="[insert restaurant name]"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_room_building"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_room_name"
+                android:fontFamily="@font/alegreya_sans_sc_light"
                 android:text="[insert address here]" />
 
 
@@ -44,6 +47,7 @@
                 android:layout_alignBaseline="@+id/tv_room_building"
                 android:layout_alignBottom="@+id/tv_room_building"
                 android:layout_alignParentEnd="true"
+                android:fontFamily="@font/alegreya_sans_sc_light"
                 android:text="[category]" />
 
         </RelativeLayout>

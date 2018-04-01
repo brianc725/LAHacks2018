@@ -26,17 +26,21 @@ android:layout_height="match_parent"
         android:id="@+id/bt_selectimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="chooseImage"
         android:layout_weight="1"
-        android:text="Select Image" />
+        android:fontFamily="@font/alegreya_sans_sc_light"
+        android:onClick="chooseImage"
+        android:text="Select Image"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/bt_uploadimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="uploadImage"
         android:layout_weight="1"
-        android:text="Upload Image" />
+        android:fontFamily="@font/alegreya_sans_sc_light"
+        android:onClick="uploadImage"
+        android:text="Upload Image"
+        android:textStyle="bold" />
 </LinearLayout>
 
 <ScrollView

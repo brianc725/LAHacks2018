@@ -13,8 +13,8 @@
         android:id="@+id/tv_final_rest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/advent_pro"
-        android:text="Polling"
+        android:fontFamily="@font/alegreya_sans_sc_light"
+        android:text="Pending"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="30sp" />
