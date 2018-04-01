@@ -22,7 +22,6 @@ public class FsqApp {
     private String mParams;
     private String mAccessToken;
     private static final String API_URL = "https://api.foursquare.com/v2";
-    private static final String CALLBACK_URL = "myapp://connect";
 
     public FsqApp(String client_id, String client_secret, String query, String radius) {
         mParams = "&query=" + query + "&radius=" + radius;
