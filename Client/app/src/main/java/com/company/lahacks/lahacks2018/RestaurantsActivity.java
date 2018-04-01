@@ -79,8 +79,6 @@ public class RestaurantsActivity extends AppCompatActivity {
         //mVenueList = new ArrayList<>();
         mVenueList.clear();
 
-//        loadNearby(34.07, -118.45); //TODO: temporary
-
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -170,25 +168,6 @@ public class RestaurantsActivity extends AppCompatActivity {
         }
 
     }
-/*
-    private void loadNearby(final double latitude, final double longitude) {
-
-        new Thread() {
-            @Override
-            public void run() {
-                int what = 0;
-                try {
-                    mVenueList = mFsqApp.getNearby(latitude, longitude);
-                    FsqVenue f = mVenueList.get(0);
-                } catch (Exception e) {
-                    what = 1;
-                    e.printStackTrace();
-                }
-                mHandler.sendMessage(mHandler.obtainMessage(what));
-            }
-        }.start();
-
-    }*/
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override

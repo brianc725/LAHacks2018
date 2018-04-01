@@ -31,7 +31,7 @@ public class FsqApp {
         ArrayList<FsqVenue> venueList = new ArrayList<>();
         String v = msToString(System.currentTimeMillis());
         String ll = String.valueOf(latitude) + "," + String.valueOf(longitude);
-        URL url = new URL(API_URL + "/venues/suggestcompletion?ll=" + ll + mParams + mAccessToken + "&v=" + v);
+        URL url = new URL(API_URL + "/venues/search?ll=" + ll + mParams + mAccessToken + "&v=" + v);
 
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -42,7 +42,7 @@ public class FsqApp {
 
         String response = streamToString(urlConnection.getInputStream());
         JSONObject jsonObj = (JSONObject) new JSONTokener(response).nextValue();
-        JSONArray groups = jsonObj.getJSONObject("response").getJSONArray("minivenues");
+        JSONArray groups = jsonObj.getJSONObject("response").getJSONArray("venues");
         int length = groups.length();
 
         if (length > 0) {
@@ -65,7 +65,7 @@ public class FsqApp {
 
 
                 JSONArray categories = group.getJSONArray("categories");
-                if (categories.length() > 1) {
+                if (categories.length() > 0) {
                     JSONObject category_type = categories.getJSONObject(0);
                     if (category_type.has("name")) {
                         venue.type = category_type.getString("name");
