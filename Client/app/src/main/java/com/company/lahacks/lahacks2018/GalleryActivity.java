@@ -120,4 +120,12 @@ public class GalleryActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void submitPhotos(View view) {
+        //do some submitting magic here
+        //
+
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
 }
