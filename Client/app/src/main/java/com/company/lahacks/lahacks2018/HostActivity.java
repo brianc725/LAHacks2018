@@ -130,6 +130,7 @@ public class HostActivity extends AppCompatActivity {
                 intent.putExtra("lon", -118.4455);
                 intent.putExtra("distance", distance);
                 intent.putExtra("lucky", luckySwitch.isChecked());
+                intent.putExtra("lobbyName", lobbyName);
                 startActivity(intent);
 
             }
