@@ -5,20 +5,39 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
+    android:background="@drawable/wood_background"
     tools:context="com.company.lahacks.lahacks2018.MainActivity">
+    <!-- android:layout_margin="8dp" -->
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="156dp"
+        android:gravity="center"
+        android:fontFamily="@font/roboto_light"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:fontFamily="@font/roboto_light"
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,11 +48,12 @@
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="signIn"
         android:text="Sign In"
         android:textStyle="bold"
+        android:background="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
@@ -43,30 +63,16 @@
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="createAccount"
         android:text="Create Account"
         android:textStyle="bold"
+        android:background="#a38873"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/bt_signin"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
-    <EditText
-        android:id="@+id/et_username"
-        android:layout_width="352dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="156dp"
-        android:fontFamily="@font/roboto_light"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wood_background"
     >
 
     <ProgressBar
@@ -24,23 +24,36 @@ android:layout_height="match_parent"
 
     <Button
         android:id="@+id/bt_selectimage"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_weight="1"
+        android:background="@color/colorPrimary"
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="chooseImage"
         android:text="Select Image"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
+        />
+
 
     <Button
         android:id="@+id/bt_uploadimage"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="uploadImage"
         android:text="Upload Image"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        />
+
 </LinearLayout>
 
 <ScrollView

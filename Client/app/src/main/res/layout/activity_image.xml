@@ -3,13 +3,16 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wood_background"
     android:gravity="center_vertical"  >
 
 
     <Button
         android:id="@+id/btn_show_gallery"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:text="Click on the photos that look yummy!"
         android:textStyle="bold" />

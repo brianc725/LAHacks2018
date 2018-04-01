@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-   android:layout_gravity="center"
-    android:layout_margin="8dp"
+    android:layout_gravity="center"
+    android:background="@drawable/wood_background"
     tools:context="com.company.lahacks.lahacks2018.ClientActivity">
 
     <TextView
@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/alegreya_sans_sc_light"
+        android:layout_marginTop="210dp"
         android:text="Pending"
         android:textAlignment="center"
         android:textColor="@android:color/black"
