@@ -32,10 +32,6 @@
         android:id="@+id/bt_image"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-=======
-        android:layout_marginBottom="48dp"
->>>>>>> 795044888508e3dd2fb1e7f29a523cec6bbad3a1
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="uploadImage"
         android:text="Submit Image"
