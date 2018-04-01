@@ -3,7 +3,6 @@
     package="com.company.lahacks.lahacks2018">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     package="com.example.currentplacedetailsonmap">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -33,9 +32,12 @@
         <activity
             android:name=".GalleryActivity"
             android:exported="true" />
-        <activity android:name=".RestaurantsActivity"
-            android:exported="true"/>
-        <activity android:name=".HostActivity"></activity>
+        <activity
+            android:name=".RestaurantsActivity"
+            android:exported="true" />
+        <activity android:name=".HostActivity" />
+        <activity android:name=".ClientActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

@@ -139,6 +139,7 @@ public class HomeActivity extends AppCompatActivity {
                         myRef.child("parties").child(s).child(j).setValue(l);
                         myRef.child("parties").child(s).child(score).setValue(0);
                     }
+                    myRef.child("parties").child(s).child("Final Restaurant").setValue("Pending");
                     updateImageUI();
                 }else {
                     return;
