@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".HostActivity">
 
+    <Button
+        android:id="@+id/bt_close"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:onClick="closeParty"
+        android:text="Close Party"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="301dp" />
 </android.support.constraint.ConstraintLayout>
