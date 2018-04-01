@@ -182,8 +182,12 @@ public class GalleryActivity extends AppCompatActivity {
 
             }
         });
-
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        if(isHost) {
+            Intent intent = new Intent(this, HostActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 }
