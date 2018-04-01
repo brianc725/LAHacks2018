@@ -8,7 +8,4 @@ public class FsqVenue {
     public String address;
     public String type;
     public Location location;
-    public int direction;
-    public int distance;
-    public int herenow;
 }
