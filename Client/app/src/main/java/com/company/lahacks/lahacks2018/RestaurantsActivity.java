@@ -28,6 +28,8 @@ public class RestaurantsActivity extends AppCompatActivity {
 
         mFsqApp = new FsqApp(CLIENT_ID, CLIENT_SECRET, mQuery, mDistance);
         mVenueList = new ArrayList<>();
+
+        loadNearby(34.07, -118.45); //TODO: temporary
     }
 
     private void loadNearby(final double latitude, final double longitude) {
