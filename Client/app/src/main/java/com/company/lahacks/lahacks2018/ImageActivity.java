@@ -22,6 +22,7 @@ public class ImageActivity extends AppCompatActivity {
                 Intent galleryIntent = new Intent(ImageActivity.this, GalleryActivity.class);
                 galleryIntent.putExtra("mUrls",getIntent().getExtras().getStringArray("mUrl"));
                 galleryIntent.putExtra("isHost",getIntent().getExtras().getBoolean("isHost"));
+                galleryIntent.putExtra("lobbyName",getIntent().getExtras().getString("lobbyName"));
                 startActivity(galleryIntent);
             }
         });
