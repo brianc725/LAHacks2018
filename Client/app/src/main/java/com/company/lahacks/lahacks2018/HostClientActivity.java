@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -56,7 +57,7 @@ public class HostClientActivity extends AppCompatActivity {
 
     }
 
-    public void finish() {
+    public void finish(View view) {
         myRef.child("parties").child(lobbyName).removeValue();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);

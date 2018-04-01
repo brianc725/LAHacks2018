@@ -39,12 +39,14 @@
         <activity
             android:name=".ClientActivity"
             android:exported="true" />
+        <activity android:name=".HostClientActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".HostClientActivity"></activity>
+
     </application>
 
 </manifest>

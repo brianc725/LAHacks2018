@@ -20,9 +20,11 @@
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bt_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:onClick="finish"
+        android:text="Finish"
+        android:visibility="visible" />
 
 </LinearLayout>
