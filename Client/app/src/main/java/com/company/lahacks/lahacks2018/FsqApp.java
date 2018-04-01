@@ -54,20 +54,28 @@ public class FsqApp {
                 venue.name = group.getString("name");
 
                 JSONObject location = group.getJSONObject("location");
+                if (location.has("address")) {
+                    venue.address = location.getString("address");
+                } else {
+                    venue.address = "Address does not exist";
+                }
                 Location loc = new Location(LocationManager.GPS_PROVIDER);
                 loc.setLatitude(Double.valueOf(location.getString("lat")));
                 loc.setLongitude(Double.valueOf(location.getString("lng")));
                 venue.location = loc;
 
 
-                //TODO: Fix this
-               // venue.address = location.getString("address");
-
                 JSONArray categories = group.getJSONArray("categories");
-
-//                JSONObject category_type = categories.getJSONObject(0);
-  //              venue.type = category_type.getString("name");
-
+                if (categories.length() > 1) {
+                    JSONObject category_type = categories.getJSONObject(0);
+                    if (category_type.has("name")) {
+                        venue.type = category_type.getString("name");
+                    } else {
+                        venue.type = "Category does not exist";
+                    }
+                } else {
+                    venue.type = "Category does not exist";
+                }
                 venueList.add(venue);
             }
         }
