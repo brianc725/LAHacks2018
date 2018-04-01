@@ -13,10 +13,10 @@
         android:id="@+id/bt_makeparty"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="230dp"
+        android:layout_marginBottom="200dp"
         android:layout_marginEnd="44dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="230dp"
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="createParty"
         android:text="Make Party"
@@ -43,10 +43,10 @@
         android:id="@+id/bt_joinparty"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="230dp"
+        android:layout_marginBottom="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="230dp"
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="joinParty"
         android:text="Join Party"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toStartOf="@+id/bt_makeparty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/et_lobby"
@@ -63,7 +63,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="130dp"
         android:fontFamily="@font/roboto_light"
         android:hint="Lobby Name"
         app:layout_constraintEnd_toEndOf="parent"

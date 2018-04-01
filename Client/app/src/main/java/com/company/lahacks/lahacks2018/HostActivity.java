@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -41,6 +42,7 @@ public class HostActivity extends AppCompatActivity {
     private String crash;
 
     SeekBar distanceSeekBar;
+    Switch luckySwitch;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -86,6 +88,9 @@ public class HostActivity extends AppCompatActivity {
                 currDistance = progressChangedValue;
             }
         });
+
+        //Set the switch
+        luckySwitch = (Switch) findViewById(R.id.s_switch);
     }
 
 
@@ -124,6 +129,7 @@ public class HostActivity extends AppCompatActivity {
                 intent.putExtra("lat", 34.0635);
                 intent.putExtra("lon", -118.4455);
                 intent.putExtra("distance", distance);
+                intent.putExtra("lucky", luckySwitch.isChecked());
                 startActivity(intent);
 
             }

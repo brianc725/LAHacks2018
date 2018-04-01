@@ -39,7 +39,7 @@ public class RestaurantsActivity extends AppCompatActivity {
     public String mDistance;
     public double mLat;
     public double mLong;
-
+    private boolean isLucky;
 
     private void setParams() {
         Intent intent = getIntent();
@@ -50,6 +50,7 @@ public class RestaurantsActivity extends AppCompatActivity {
             mDistance = extras.getString("distance");
             mLat = extras.getDouble("lat");
             mLong = extras.getDouble("lon");
+            isLucky = extras.getBoolean("lucky");
         } catch (Throwable e) {
             what = 1;
         }
@@ -117,7 +118,12 @@ public class RestaurantsActivity extends AppCompatActivity {
         ArrayList<FsqVenue> venues;
 
         RVAdapter(ArrayList<FsqVenue> venues) {
-            this.venues = venues;
+            if (!isLucky) {
+                this.venues = venues;
+            } else {
+                this.venues = new ArrayList<>();
+                this.venues.add(venues.get(0));
+            }
         }
 
         @Override
