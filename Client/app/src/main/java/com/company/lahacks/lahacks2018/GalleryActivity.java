@@ -190,7 +190,8 @@ public class GalleryActivity extends AppCompatActivity {
             intent.putExtra("lobbyName", lobbyName);
             startActivity(intent);
         } else {
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, ClientActivity.class);
+            intent.putExtra("lobbyName", lobbyName);
             startActivity(intent);
         }
     }
