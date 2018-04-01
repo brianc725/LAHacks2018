@@ -16,11 +16,17 @@ import com.bumptech.glide.Glide;
 public class GalleryActivity extends AppCompatActivity {
 
     private String[] mUrls;
+    private String newURL = "https://upload.wikimedia.org/wikipedia/en/c/c7/Bonobos_Lana_%26_Kesi_2006_CALVIN_IMG_1301.JPG";
+    private boolean[] changed = new boolean[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
         mUrls = extras.getStringArray("mUrls");
+
+        for (int i = 0; i < 6; i++) {
+            changed[i] = false;
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
@@ -80,11 +86,21 @@ public class GalleryActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
                 int position = getAdapterPosition();
+                String url;
+                if (changed[position]) {
+                    url = mUrls[position];
+                } else {
+                    url = newURL;
+                }
+                changed[position] = !changed[position];
                 if(position != RecyclerView.NO_POSITION) {
                     MyPhoto mPhoto = mPhotos[position];
 
+                    Glide.with(mContext)
+                            .load(url)
+//                    .placeholder(R.drawable.ic_cloud_off_red)
+                            .into(mPhotoImageView);
                     //later if time create PhotoActivity
 //                    Intent intent = new Intent(mContext, PhotoActivity.class);
 //                    intent.putExtra(PhotoActivity.EXTRA_SPACE_PHOTO, mPhoto);
