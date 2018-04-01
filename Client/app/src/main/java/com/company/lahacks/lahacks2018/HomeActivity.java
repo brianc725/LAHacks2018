@@ -93,16 +93,22 @@ public class HomeActivity extends AppCompatActivity {
 
     public void joinParty(View view){
         final String partyName = lobby.getText().toString();
-
+        if (!getLobbyName()) {
+            Toast.makeText(HomeActivity.this, "Lobby name cannot be empty!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.child("parties").getValue();
                 if(map.containsKey(partyName)) {
-                    Log.d("asdf", map.toString());
-                    ArrayList<String> urls = (ArrayList<String>) map.get(partyName);
-                    for(int i = 0; i < urls.size(); i++) {
-                        mUrls[i] = urls.get(i);
+                    ArrayList<String> urls = new ArrayList<String> ();
+                    for(int i = 0; i < 6; i++) {
+                        String l = Integer.toString(i);
+                        String photo = (String) dataSnapshot.child("parties").child(partyName).child(l).getValue();
+                        mUrls[i] = photo;
+                        Log.d("abc", mUrls[i]);
                     }
                     updateImageUI();
                 }else {
@@ -129,7 +135,9 @@ public class HomeActivity extends AppCompatActivity {
                     for(int i = 0; i < 6; i ++) {
                         String j = Integer.toString(i);
                         String l = mUrls[i];
+                        String score = "Photo " + i + " score";
                         myRef.child("parties").child(s).child(j).setValue(l);
+                        myRef.child("parties").child(s).child(score).setValue("0");
                     }
                     updateImageUI();
                 }else {

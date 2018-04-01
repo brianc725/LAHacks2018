@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    package="com.example.currentplacedetailsonmap">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +33,9 @@
         <activity
             android:name=".GalleryActivity"
             android:exported="true" />
-        <activity android:name=".RestaurantsActivity"></activity>
+        <activity android:name=".RestaurantsActivity"
+            android:exported="true"/>
+        <activity android:name=".HostActivity"></activity>
     </application>
 
 </manifest>
