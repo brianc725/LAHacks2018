@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import static com.company.lahacks.lahacks2018.MainActivity.EncodeString;
+
 public class HomeActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -28,8 +31,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private String[] mUrls = new String[6];
     private String lobbyName;
+    private String email;
     private boolean isHost = false;
     private EditText lobby;
+    private int coins;
+    TextView mCoins;
 
     public void updateImageUI() {
         Intent intent = new Intent(this, ImageActivity.class);
@@ -49,8 +55,43 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Intent intent = getIntent();
+        Bundle extras = getIntent().getExtras();
+        email = extras.getString("email");
         lobby = (EditText) findViewById(R.id.et_lobby);
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Long tempLong = ((Long) dataSnapshot.child("Users").child(EncodeString(email)).child("coins").getValue());
+                if (tempLong == null) { //if it was just created
+                    coins = 50;
+                } else {
+                    coins = tempLong.intValue();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mCoins = (TextView) findViewById(R.id.tv_coins);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mCoins.setText("You have " + Integer.toString(coins) + " coins.");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public boolean getLobbyName(){
@@ -78,6 +119,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.child("parties").getValue();
+                if (map.isEmpty()){
+                    myRef.child("parties").child(partyName).setValue(partyName);
+                    generateImages(partyName);
+                }
                 if(map.containsKey(partyName)) {
                     Toast.makeText(HomeActivity.this, "Sorry that lobby already exists!",
                             Toast.LENGTH_SHORT).show();
@@ -191,4 +236,7 @@ public class HomeActivity extends AppCompatActivity {
         updateUploadUI();
     }
 
+    public static String EncodeString(String string) {
+        return string.replace(".", ",");
+    }
 }

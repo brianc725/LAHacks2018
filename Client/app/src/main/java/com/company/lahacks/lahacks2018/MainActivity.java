@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.functions.FirebaseFunctions;
 import com.google.firebase.functions.HttpsCallableResult;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private String email;
     private String password;
     private FirebaseFunctions mFunctions;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateUI() {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
 
@@ -119,6 +126,17 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Authentication succeeded.",
                                     Toast.LENGTH_SHORT).show();
+
+                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    myRef.child("Users").child(EncodeString(email)).child("coins").setValue((Integer)50);
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                             updateUI();
                          //   updateUI(user);
                         } else {
@@ -135,5 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-
+    public static String EncodeString(String string) {
+        return string.replace(".", ",");
+    }
 }

@@ -10,6 +10,8 @@
         android:id="@+id/btn_show_gallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Click on the photos that look yummy!" />
+        android:fontFamily="@font/alegreya_sans_sc_light"
+        android:text="Click on the photos that look yummy!"
+        android:textStyle="bold" />
 
 </LinearLayout>
