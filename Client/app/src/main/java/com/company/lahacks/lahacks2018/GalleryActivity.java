@@ -18,7 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
+
 import static java.lang.Math.toIntExact;
 
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
@@ -184,6 +187,7 @@ public class GalleryActivity extends AppCompatActivity {
         });
         if(isHost) {
             Intent intent = new Intent(this, HostActivity.class);
+            intent.putExtra("lobbyName", lobbyName);
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, HomeActivity.class);

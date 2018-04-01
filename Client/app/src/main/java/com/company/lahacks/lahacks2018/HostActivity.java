@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -15,20 +16,38 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class HostActivity extends AppCompatActivity {
 
     private boolean mLocationPermissionGranted = false;
     private FusedLocationProviderClient mFusedLocationClient;
 
+    private String lobbyName;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
+    private static String keyWord;
     private double lat;
     private double lon;
+    private int currDistance = 0;
+
+
+    private String crash;
 
     SeekBar distanceSeekBar;
 
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle extras = getIntent().getExtras();
+        lobbyName = extras.getString("lobbyName");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host);
 
@@ -47,7 +66,7 @@ public class HostActivity extends AppCompatActivity {
                 });
 
         //Set the maximum distance seekbar
-        distanceSeekBar = (SeekBar)findViewById(R.id.sb_distance);
+        distanceSeekBar = (SeekBar) findViewById(R.id.sb_distance);
         distanceSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChangedValue = 0;
 
@@ -61,15 +80,54 @@ public class HostActivity extends AppCompatActivity {
 
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Toast.makeText(HostActivity.this, "Max distance is:" + progressChangedValue + "km.", Toast.LENGTH_SHORT).show();
+                currDistance = progressChangedValue;
             }
         });
     }
 
-    public void closeParty(View view) {
-        //close the party and push the lon, lat, max distance, and other options
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-    }
 
+    public void closeParty(final View view) {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int curr = 0;
+                int highest = 0;
+                for (int i = 0; i < 6; i++) {
+                    String j = "Photo " + i + " score";
+                    int value = ((Long) dataSnapshot.child("parties").child(lobbyName).child(j).getValue()).intValue();
+                    if (value > curr) {
+                        curr = value;
+                        highest = i;
+                    }
+                }
+                String highestVal = Integer.toString(highest);
+                String decision = (String) dataSnapshot.child("parties").child(lobbyName).child(highestVal).getValue();
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.child("food").getValue();
+
+                Object[] keyValues = map.keySet().toArray();
+
+                for (int i = 0; i < keyValues.length; i++) {
+                    if (map.get(keyValues[i]).equals(decision)) {
+                        keyWord = (String) keyValues[i];
+                        break;
+                    }
+                }
+
+                Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                intent.putExtra("keyWord", keyWord);
+                intent.putExtra("lat", lat);
+                intent.putExtra("lon", lon);
+                intent.putExtra("currDistance", currDistance);
+                startActivity(intent);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 }
 
