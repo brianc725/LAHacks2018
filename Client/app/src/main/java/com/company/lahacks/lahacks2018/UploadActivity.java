@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -27,6 +30,11 @@ public class UploadActivity extends AppCompatActivity {
 
     private StorageReference mStorageRef;
 
+    private FirebaseDatabase database;
+    private DatabaseReference foodRef;
+
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +43,11 @@ public class UploadActivity extends AppCompatActivity {
         imageView = findViewById(R.id.iv_userimage);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
+        database = FirebaseDatabase.getInstance();
+        foodRef = database.getReference().child("food");
+
+        progressBar = findViewById(R.id.pb_upload);
+        progressBar.setProgress(0);
     }
 
     private void openGallery() {
@@ -70,16 +83,38 @@ public class UploadActivity extends AppCompatActivity {
         final StorageReference photoRef = mStorageRef.child("photos")
                 .child(imageUri.getLastPathSegment());
 
-        photoRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        photoRef.putFile(imageUri).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                int prog = (int) progress;
+
+                progressBar.setProgress(prog);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // Upload succeeded
+
+                progressBar.setProgress(0); //reset progress back to 0 when complete
 
                 // Get the public download URL
                 //Uri downloadUri = taskSnapshot.getMetadata().getDownloadUrl();
 
                 Toast.makeText(UploadActivity.this, "Photo successfully uploaded.",
                         Toast.LENGTH_SHORT).show();
+
+                String foodname;
+                String foodlink;
+
+                // TODO: Google Cloud Vision the food item here
+
+                foodname = "tomato"; //temporary
+
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                foodlink = downloadUrl.toString();
+
+                foodRef.child(foodname).setValue(foodlink);
             }
         })
         .addOnFailureListener(new OnFailureListener() {
