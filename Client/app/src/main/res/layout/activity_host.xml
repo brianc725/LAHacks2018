@@ -47,7 +47,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="64dp"
-        android:text="0"
+        android:text="10"
         app:layout_constraintStart_toStartOf="@+id/sb_distance"
         app:layout_constraintTop_toTopOf="parent" />
 

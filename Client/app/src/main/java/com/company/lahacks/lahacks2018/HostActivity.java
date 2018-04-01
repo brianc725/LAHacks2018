@@ -61,6 +61,9 @@ public class HostActivity extends AppCompatActivity {
                         if (location != null) {
                             lat = location.getLatitude();
                             lon = location.getLongitude();
+                        } else {
+                            lat = 34.0635016;
+                            lon = -118.44551639999997;
                         }
                     }
                 });
