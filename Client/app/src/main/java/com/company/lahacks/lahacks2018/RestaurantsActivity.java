@@ -1,19 +1,36 @@
 package com.company.lahacks.lahacks2018;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ListView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+import jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 public class RestaurantsActivity extends AppCompatActivity {
     private FsqApp mFsqApp;
-    private ArrayList<FsqVenue> mVenueList;
+    private RecyclerView mRecyclerView;
+    private ArrayList<FsqVenue> mVenueList = new ArrayList<>();
 
     public static final String CLIENT_ID = "YQMNRZM5OXBUQQPLZX5DN1P5ER1U3KVWDRDFLNDJKB2MSNAD";
     public static final String CLIENT_SECRET = "G3ZAUGE2CGIMNPT2BKSCZI4TA4VSX0YQP011WVIK00QJLFID";
@@ -23,28 +40,16 @@ public class RestaurantsActivity extends AppCompatActivity {
     public double mLat;
     public double mLong;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurants);
-
-        setParams();
-
-        mFsqApp = new FsqApp(CLIENT_ID, CLIENT_SECRET, mQuery, mDistance);
-        mVenueList = new ArrayList<>();
-
-        loadNearby(mLat, mLong);
-    }
 
     private void setParams() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         int what = 0;
         try {
-            mQuery = extras.getString("EXTRA_QUERY");
-            mDistance = extras.getString("EXTRA_DISTANCE");
-            mLat = extras.getDouble("EXTRA_LAT");
-            mLong = extras.getDouble("EXTRA_LONG");
+            mQuery = extras.getString("keyWord");
+            mDistance = extras.getString("distance");
+            mLat = extras.getDouble("lat");
+            mLong = extras.getDouble("lon");
         } catch (Throwable e) {
             what = 1;
         }
@@ -62,6 +67,104 @@ public class RestaurantsActivity extends AppCompatActivity {
         }
     });
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_restaurants);
+
+        setParams();
+
+        mFsqApp = new FsqApp(CLIENT_ID, CLIENT_SECRET, mQuery, mDistance);
+        //mVenueList = new ArrayList<>();
+        mVenueList.clear();
+
+//        loadNearby(34.07, -118.45); //TODO: temporary
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                int what = 0;
+                try {
+                    mVenueList = mFsqApp.getNearby(mLat, mLong);
+                    FsqVenue f = mVenueList.get(0);
+                } catch (Exception e) {
+                    what = 1;
+                    e.printStackTrace();
+                }
+                mHandler.sendMessage(mHandler.obtainMessage(what));
+            }
+        };
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        mRecyclerView = findViewById(R.id.rv_restaurant_list);
+        mRecyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(llm);
+
+        RestaurantsActivity.RVAdapter adapter = new RestaurantsActivity.RVAdapter(mVenueList);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+
+    public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RestaurantHolder> {
+
+        ArrayList<FsqVenue> venues;
+
+        RVAdapter(ArrayList<FsqVenue> venues) {
+            this.venues = venues;
+        }
+
+        @Override
+        public int getItemCount() {
+            return venues.size();
+        }
+
+        @Override
+        public RestaurantHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.restaurant_item, viewGroup, false);
+            RestaurantHolder rh = new RestaurantHolder(v);
+            return rh;
+        }
+
+        @Override
+        public void onBindViewHolder(RVAdapter.RestaurantHolder holder, int i) {
+            FsqVenue temp = new FsqVenue();
+            temp = venues.get(i);
+            holder.roomname.setText(temp.name);
+            holder.roomaddr.setText(temp.address);
+            holder.roomcat.setText(temp.type);
+        }
+
+        /*
+        @Override
+        public void onAttachedToReyclerView(RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+        }*/
+
+        public class RestaurantHolder extends RecyclerView.ViewHolder {
+            CardView cv;
+            TextView roomname;
+            TextView roomaddr;
+            TextView roomcat;
+
+            RestaurantHolder(View itemView) {
+                super(itemView);
+                cv = (CardView) itemView.findViewById(R.id.cv_restaurantcard);
+                roomname = (TextView) itemView.findViewById(R.id.tv_room_name);
+                roomaddr = (TextView) itemView.findViewById(R.id.tv_room_addr);
+                roomcat = (TextView) itemView.findViewById(R.id.tv_room_cat);
+            }
+        }
+
+    }
+/*
     private void loadNearby(final double latitude, final double longitude) {
 
         new Thread() {
@@ -70,6 +173,7 @@ public class RestaurantsActivity extends AppCompatActivity {
                 int what = 0;
                 try {
                     mVenueList = mFsqApp.getNearby(latitude, longitude);
+                    FsqVenue f = mVenueList.get(0);
                 } catch (Exception e) {
                     what = 1;
                     e.printStackTrace();
@@ -77,7 +181,8 @@ public class RestaurantsActivity extends AppCompatActivity {
                 mHandler.sendMessage(mHandler.obtainMessage(what));
             }
         }.start();
-    }
+
+    }*/
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -87,6 +192,7 @@ public class RestaurantsActivity extends AppCompatActivity {
                     Toast.makeText(RestaurantsActivity.this, "No venues that match query nearby", Toast.LENGTH_SHORT).show();
                     return false;
                 }
+                RecyclerView.generateViewId();
             } else {
                 Toast.makeText(RestaurantsActivity.this, "Failed to load nearby venues", Toast.LENGTH_SHORT).show();
                 return false;

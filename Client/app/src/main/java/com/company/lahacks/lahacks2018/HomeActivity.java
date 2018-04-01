@@ -114,6 +114,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.child("parties").getValue();
+                if (map.isEmpty()){
+                    myRef.child("parties").child(partyName).setValue(partyName);
+                    generateImages(partyName);
+                }
                 if(map.containsKey(partyName)) {
                     Toast.makeText(HomeActivity.this, "Sorry that lobby already exists!",
                             Toast.LENGTH_SHORT).show();
