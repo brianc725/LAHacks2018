@@ -1,5 +1,7 @@
 package com.company.lahacks.lahacks2018;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 
@@ -56,8 +58,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Bundle extras = getIntent().getExtras();
-        email = extras.getString("email");
         lobby = (EditText) findViewById(R.id.et_lobby);
+
+        SharedPreferences sharedPref = getSharedPreferences("LAHacks2018", Context.MODE_PRIVATE);
+        email = sharedPref.getString("email", "a@a.com");
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

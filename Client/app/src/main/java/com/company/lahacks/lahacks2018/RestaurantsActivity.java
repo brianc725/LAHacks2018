@@ -19,8 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -127,7 +130,9 @@ public class RestaurantsActivity extends AppCompatActivity {
                 this.venues = venues;
             } else {
                 this.venues = new ArrayList<>();
-                this.venues.add(venues.get(0));
+                if (venues.size() > 0) {
+                    this.venues.add(venues.get(0));
+                }
             }
         }
 
@@ -171,6 +176,33 @@ public class RestaurantsActivity extends AppCompatActivity {
                 roomname = (TextView) itemView.findViewById(R.id.tv_room_name);
                 roomaddr = (TextView) itemView.findViewById(R.id.tv_room_addr);
                 roomcat = (TextView) itemView.findViewById(R.id.tv_room_cat);
+
+//                itemView.setOnClickListener(new View.OnClickListener() {
+//                    public void onClick(View view) {
+//                        int position = getAdapterPosition();
+//                        //bring to another screen maybe?
+//                    }
+//                });
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    public boolean onLongClick(View view) {
+                        final int position = getAdapterPosition();
+
+                        //change the value in database
+                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                myRef.child("parties").child(lobbyName).child("Final Restaurant").setValue(venues.get(position).name);
+                                //finish();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        return true;
+                    }
+                });
             }
         }
 

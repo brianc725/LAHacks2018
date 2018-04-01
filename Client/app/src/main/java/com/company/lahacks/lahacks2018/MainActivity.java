@@ -1,6 +1,8 @@
 package com.company.lahacks.lahacks2018;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,8 +71,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateUI() {
+        SharedPreferences sharedPref = getSharedPreferences("LAHacks2018", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", email);
+        editor.commit();
+
         Intent intent = new Intent(this, HomeActivity.class);
-        intent.putExtra("email", email);
         startActivity(intent);
     }
 
