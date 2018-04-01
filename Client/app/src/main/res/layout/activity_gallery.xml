@@ -20,4 +20,14 @@
         android:layout_centerHorizontal="true"
         android:onClick="submitPhotos"
         android:text="Submit" />
+
+    <Button
+        android:id="@+id/bt_report"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="reportPhotos"
+        android:text="Report"
+        android:textSize="10sp" />
 </RelativeLayout>

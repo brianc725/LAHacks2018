@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,9 @@ import java.util.Set;
 
 import static java.lang.Math.toIntExact;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+import jp.wasabeef.glide.transformations.gpu.SepiaFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
@@ -120,7 +123,7 @@ public class GalleryActivity extends AppCompatActivity {
                                 Glide.with(mContext)
                                         .load(url)
 //                                      .placeholder(R.drawable.ic_cloud_off_red)
-                                        .apply(bitmapTransform(new GrayscaleTransformation()))
+                                        .apply(bitmapTransform(new BlurTransformation()))
                                         .into(mPhotoImageView);
                                 mValues[position] = 1;
                             }
@@ -143,7 +146,7 @@ public class GalleryActivity extends AppCompatActivity {
                                 Glide.with(mContext)
                                         .load(url)
 //                                      .placeholder(R.drawable.ic_cloud_off_red)
-                                        .apply(bitmapTransform(new SwirlFilterTransformation()))
+                                        .apply(bitmapTransform(new SepiaFilterTransformation()))
                                         .into(mPhotoImageView);
                                 mValues[position] = 2;
                             }
@@ -164,6 +167,11 @@ public class GalleryActivity extends AppCompatActivity {
                 mPhotos[i] = new MyPhoto(mUrls[i]);
             }
         }
+    }
+
+    public void reportPhotos(View view) {
+        Toast.makeText(GalleryActivity.this, "Thanks for reporting! We will review the images, and if they are inappropriate images, you will be rewarded with coins!",
+                Toast.LENGTH_LONG).show();
     }
 
     public void submitPhotos(View view) {
