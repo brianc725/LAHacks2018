@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
@@ -24,14 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
 
-    private String[] mUrls = {
-            "http://i.imgur.com/zuG2bGQ.jpg",
-            "http://i.imgur.com/zuG2bGQ.jpg",
-            "http://i.imgur.com/zuG2bGQ.jpg",
-            "http://i.imgur.com/zuG2bGQ.jpg",
-            "http://i.imgur.com/zuG2bGQ.jpg",
-            "http://i.imgur.com/zuG2bGQ.jpg"
-    };
+    private String[] mUrls = new String[6];
 
     private EditText lobby;
 
@@ -73,14 +68,14 @@ public class HomeActivity extends AppCompatActivity {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                if(map.containsValue(partyName)) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.child("parties").getValue();
+                if(map.containsKey(partyName)) {
                     Toast.makeText(HomeActivity.this, "Sorry that lobby already exists!",
                             Toast.LENGTH_SHORT).show();
                     return;
                 }else {
-                    myRef.child(partyName).setValue(partyName);
-                    updateImageUI();
+                    myRef.child("parties").child(partyName).setValue(partyName);
+                    generateImages(partyName);
                 }
 
             }
@@ -98,8 +93,13 @@ public class HomeActivity extends AppCompatActivity {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                if(map.containsValue(partyName)) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.child("parties").getValue();
+                if(map.containsKey(partyName)) {
+                    Log.d("asdf", map.toString());
+                    ArrayList<String> urls = (ArrayList<String>) map.get(partyName);
+                    for(int i = 0; i < urls.size(); i++) {
+                        mUrls[i] = urls.get(i);
+                    }
                     updateImageUI();
                 }else {
                     Toast.makeText(HomeActivity.this, "That lobby doesn't exist!",
@@ -115,6 +115,54 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    public void generateImages(final String s){
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.child("parties").getValue();
+                if(map.containsValue(s)) {
+                    foodHelper((Map<String, Object>) dataSnapshot.getValue());
+                    for(int i = 0; i < 6; i ++) {
+                        String j = Integer.toString(i);
+                        String l = mUrls[i];
+                        myRef.child("parties").child(s).child(j).setValue(l);
+                    }
+                    updateImageUI();
+                }else {
+                    return;
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void foodHelper(Map<String, Object> map){
+        Map<String, String> foodUrls = (Map<String, String>) map.get("food");
+        int length = foodUrls.size();
+
+        Object[] keys = foodUrls.keySet().toArray();
+        int numPics = 6;
+        int size = 0;
+        int[] chosenPics = new int[length];
+        while (numPics > 0) {
+            int randInt = (int) (Math.random() * length);
+            boolean contains = false;
+            for (int i = 0; i < size; i++) {
+                if (chosenPics[i] == randInt)
+                    contains = true;
+            }
+            if(contains)
+                continue;
+            chosenPics[6 - numPics] = randInt;
+            mUrls[6 - numPics] = foodUrls.get((String) keys[randInt]);
+            size++;
+            numPics--;
+        }
+    }
 
     public void uploadImage(View view) {
         updateUploadUI();
