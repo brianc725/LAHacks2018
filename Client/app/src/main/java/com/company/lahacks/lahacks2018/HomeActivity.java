@@ -27,12 +27,15 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference();
 
     private String[] mUrls = new String[6];
-
+    private String lobbyName;
+    private boolean isHost = false;
     private EditText lobby;
 
     public void updateImageUI() {
         Intent intent = new Intent(this, ImageActivity.class);
         intent.putExtra("mUrl", mUrls);
+        intent.putExtra("isHost", isHost);
+        intent.putExtra("lobbyName", lobbyName);
         startActivity(intent);
     }
 
@@ -51,8 +54,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public boolean getLobbyName(){
-        String partyName = lobby.getText().toString();
-        if(partyName.equals(""))
+        lobbyName = lobby.getText().toString();
+        if(lobbyName.equals(""))
             return false;
         return true;
     }
@@ -65,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
         final String partyName = lobby.getText().toString();
+        isHost = true;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
