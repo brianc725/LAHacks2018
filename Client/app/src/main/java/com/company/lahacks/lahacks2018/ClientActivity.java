@@ -28,10 +28,10 @@ public class ClientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
 
-       // Bundle extras = getIntent().getExtras(); //TODO: FIX THIS ONCE LOBBY  NAME IS PASSED IN
-       // lobbyName = extras.getString("lobbyName");
+        Bundle extras = getIntent().getExtras(); //TODO: FIX THIS ONCE LOBBY  NAME IS PASSED IN
+        lobbyName = extras.getString("lobbyName");
 
-        lobbyName = "banana"; //TODO: REMOVE THIS, THIS IS TEMPORARY FOR TESTING
+//        lobbyName = "banana"; //TODO: REMOVE THIS, THIS IS TEMPORARY FOR TESTING
 
         finalname = (TextView) findViewById(R.id.tv_final_rest);
 
