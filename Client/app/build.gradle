@@ -49,6 +49,7 @@ dependencies {
     //glide-transformations  --> creates a version bsd thing :(
     implementation 'jp.wasabeef:glide-transformations:3.0.1'
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+
 }
 
 

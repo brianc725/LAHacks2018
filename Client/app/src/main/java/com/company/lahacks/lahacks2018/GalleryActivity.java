@@ -13,6 +13,12 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+import jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 public class GalleryActivity extends AppCompatActivity {
 
     private String[] mUrls;
@@ -88,23 +94,26 @@ public class GalleryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int position = getAdapterPosition();
                 String url;
-                if (changed[position]) {
-                    url = mUrls[position];
-                } else {
-                    url = newURL;
-                }
-                changed[position] = !changed[position];
+                url = mUrls[position];
+//                if (changed[position]) {
+//                    url = mUrls[position];
+//                } else {
+//                    url = newURL;
+//                }
                 if(position != RecyclerView.NO_POSITION) {
-                    MyPhoto mPhoto = mPhotos[position];
-
-                    Glide.with(mContext)
-                            .load(url)
+                    if(changed[position]) {
+                        Glide.with(mContext)
+                                .load(url)
 //                    .placeholder(R.drawable.ic_cloud_off_red)
-                            .into(mPhotoImageView);
-                    //later if time create PhotoActivity
-//                    Intent intent = new Intent(mContext, PhotoActivity.class);
-//                    intent.putExtra(PhotoActivity.EXTRA_SPACE_PHOTO, mPhoto);
-//                    startActivity(intent);
+                                .into(mPhotoImageView);
+                    } else {
+                        Glide.with(mContext)
+                                .load(url)
+//                    .placeholder(R.drawable.ic_cloud_off_red)
+                                .apply(bitmapTransform(new GrayscaleTransformation()))
+                                .into(mPhotoImageView);
+                    }
+                    changed[position] = !changed[position];
                 }
             }
         }
