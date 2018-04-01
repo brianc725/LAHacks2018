@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -31,9 +33,13 @@ public class RestaurantsActivity extends AppCompatActivity {
     private FsqApp mFsqApp;
     private RecyclerView mRecyclerView;
     private ArrayList<FsqVenue> mVenueList = new ArrayList<>();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
 
     public static final String CLIENT_ID = "YQMNRZM5OXBUQQPLZX5DN1P5ER1U3KVWDRDFLNDJKB2MSNAD";
     public static final String CLIENT_SECRET = "G3ZAUGE2CGIMNPT2BKSCZI4TA4VSX0YQP011WVIK00QJLFID";
+
+    private String lobbyName;
 
     public String mQuery;
     public String mDistance;
@@ -51,6 +57,7 @@ public class RestaurantsActivity extends AppCompatActivity {
             mLat = extras.getDouble("lat");
             mLong = extras.getDouble("lon");
             isLucky = extras.getBoolean("lucky");
+            lobbyName = extras.getString("lobbyName");
         } catch (Throwable e) {
             what = 1;
         }
@@ -185,4 +192,10 @@ public class RestaurantsActivity extends AppCompatActivity {
             return true;
         }
     });
+
+    public void finish(){
+        myRef.child("parties").child(lobbyName).removeValue();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
 }
