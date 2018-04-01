@@ -12,6 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
+import static java.lang.Math.toIntExact;
 
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation;
@@ -25,6 +33,8 @@ public class GalleryActivity extends AppCompatActivity {
     private String newURL = "https://upload.wikimedia.org/wikipedia/en/c/c7/Bonobos_Lana_%26_Kesi_2006_CALVIN_IMG_1301.JPG";
     private int[] mValues = new int[6];
     private String lobbyName;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +42,7 @@ public class GalleryActivity extends AppCompatActivity {
         mUrls = extras.getStringArray("mUrls");
         isHost = extras.getBoolean("isHost");
         lobbyName = extras.getString("lobbyName");
-        
+
         for (int i = 0; i < 6; i++) {
             mValues[i] = 0;
         }
@@ -155,6 +165,23 @@ public class GalleryActivity extends AppCompatActivity {
 
     public void submitPhotos(View view) {
         //do some submitting magic here with mValues
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(int i = 0; i < 6; i++){
+                    String j = "Photo " + i + " score";
+                    int newVal = ((Long) dataSnapshot.child("parties").child(lobbyName).child(j).getValue()).intValue();
+                    newVal += mValues[i];
+                    myRef.child("parties").child(lobbyName).child(j).setValue(newVal);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
