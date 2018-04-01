@@ -68,6 +68,11 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
         final String partyName = lobby.getText().toString();
+        if (partyName.equals("@LAHACKS")){
+            Toast.makeText(HomeActivity.this, "Invalid lobby name",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         isHost = true;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -95,6 +100,11 @@ public class HomeActivity extends AppCompatActivity {
         final String partyName = lobby.getText().toString();
         if (!getLobbyName()) {
             Toast.makeText(HomeActivity.this, "Lobby name cannot be empty!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (partyName.equals("@LAHACKS")){
+            Toast.makeText(HomeActivity.this, "Invalid lobby name",
                     Toast.LENGTH_SHORT).show();
             return;
         }

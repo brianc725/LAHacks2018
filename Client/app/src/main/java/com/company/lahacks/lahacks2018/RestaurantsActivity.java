@@ -34,9 +34,6 @@ public class RestaurantsActivity extends AppCompatActivity {
         mVenueList = new ArrayList<>();
 
         loadNearby(mLat, mLong);
-
-        int a = 1;
-        int c = a;
     }
 
     private void setParams() {
