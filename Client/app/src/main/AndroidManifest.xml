@@ -33,7 +33,8 @@
         <activity
             android:name=".GalleryActivity"
             android:exported="true" />
-        <activity android:name=".RestaurantsActivity" />
+        <activity android:name=".RestaurantsActivity"
+            android:exported="true"/>
         <activity android:name=".HostActivity"></activity>
     </application>
 
