@@ -21,12 +21,16 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
-        <activity android:name=".UploadActivity"
-            android:exported="true"></activity>
-        <activity android:name=".ImageActivity"
-            android:exported="true"></activity>
-        <activity android:name=".GalleryActivity"
-            android:exported="true"></activity>
+        <activity
+            android:name=".UploadActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ImageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GalleryActivity"
+            android:exported="true" />
+        <activity android:name=".RestaurantsActivity"></activity>
     </application>
 
 </manifest>
