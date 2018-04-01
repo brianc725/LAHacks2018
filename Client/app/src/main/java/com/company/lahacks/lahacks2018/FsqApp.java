@@ -28,7 +28,7 @@ public class FsqApp {
         mParams = "&query=" + query + "&radius=" + radius;
         mAccessToken = "&client_id=" + client_id + "&client_secret=" + client_secret;
     }
-    private ArrayList<FsqVenue> getNearby(double latitude, double longitude) throws Exception {
+    public ArrayList<FsqVenue> getNearby(double latitude, double longitude) throws Exception {
         ArrayList<FsqVenue> venueList = new ArrayList<>();
         String v = msToString(System.currentTimeMillis());
         String ll = String.valueOf(latitude) + "," + String.valueOf(longitude);
