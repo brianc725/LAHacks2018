@@ -39,6 +39,9 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.2'
     compile 'com.google.firebase:firebase-storage:12.0.1'
 
+    //location
+    implementation 'com.google.android.gms:play-services-location:12.0.1'
+
     //Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
