@@ -184,9 +184,11 @@ public class GalleryActivity extends AppCompatActivity {
         });
         if(isHost) {
             Intent intent = new Intent(this, HostActivity.class);
+            intent.putExtra("lobbyName", lobbyName);
             startActivity(intent);
         } else {
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, ClientActivity.class);
+            intent.putExtra("lobbyName", lobbyName);
             startActivity(intent);
         }
     }
