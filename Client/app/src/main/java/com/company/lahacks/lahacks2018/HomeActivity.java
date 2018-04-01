@@ -79,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
                     return;
                 }else {
                     myRef.child("parties").child(partyName).setValue(partyName);
+                    myRef.child("parties").child(partyName).child("Final Restaurant").setValue("Pending");
                     generateImages(partyName);
                 }
 
