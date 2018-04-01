@@ -44,39 +44,31 @@ public class FsqApp {
 
             String response = streamToString(urlConnection.getInputStream());
             JSONObject jsonObj = (JSONObject) new JSONTokener(response).nextValue();
-            JSONArray groups = jsonObj.getJSONObject("response").getJSONArray("groups");
+            JSONArray groups = jsonObj.getJSONObject("response").getJSONArray("minivenues");
             int length = groups.length();
 
             if (length > 0) {
                 for (int i = 0; i < length; i++) {
-                    JSONObject group = (JSONObject) groups.get(i);
-                    JSONArray items = group.getJSONArray("items");
+                    JSONObject group = groups.getJSONObject(i);
+                    FsqVenue venue = new FsqVenue();
+                    venue.id = group.getString("id");
+                    venue.name = group.getString("name");
 
-                    int ilength = items.length();
+                    JSONObject location = group.getJSONObject("location");
+                    Location loc = new Location(LocationManager.GPS_PROVIDER);
+                    loc.setLatitude(Double.valueOf(location.getString("lat")));
+                    loc.setLongitude(Double.valueOf(location.getString("lng")));
+                    venue.location = loc;
 
-                    for(int j = 0; j < ilength; j++) {
-                        JSONObject item = (JSONObject) items.get(j);
+                    venue.address = location.getString("address");
 
-                        FsqVenue venue = new FsqVenue();
-
-                        venue.id = item.getString("id");
-                        venue.name = item.getString("name");
-
-                        JSONObject location = item.getJSONObject("location");
-
-                        Location loc = new Location(LocationManager.GPS_PROVIDER);
-
-                        loc.setLatitude(Double.valueOf(location.getString("lat")));
-                        loc.setLongitude(Double.valueOf(location.getString("lng")));
-
-                        venue.location = loc;
-                        venue.address = location.getString("address");
-                        venue.distance = location.getInt("distance");
-                        venue.herenow = item.getJSONObject("hereNow").getInt("count");
-                        venue.type = group.getString("type");
-                        venueList.add(venue);
-
+                    JSONArray categories = group.getJSONArray("categories");
+                    int ilength = categories.length();
+                    if (length > 0) {
+                        JSONObject category_type = categories.getJSONObject(0);
+                        venue.type = category_type.getString("Name");
                     }
+                    venueList.add(venue);
                 }
             }
         } catch (Exception ex) {
