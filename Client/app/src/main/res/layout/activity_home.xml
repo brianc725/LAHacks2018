@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
+    android:background="@drawable/wood_background"
     tools:context="com.company.lahacks.lahacks2018.HomeActivity">
 
 
@@ -21,6 +21,7 @@
         android:onClick="createParty"
         android:text="Make Party"
         android:textStyle="bold"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bt_joinparty"
@@ -31,12 +32,19 @@
         android:id="@+id/bt_image"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
         android:layout_marginBottom="48dp"
+>>>>>>> 795044888508e3dd2fb1e7f29a523cec6bbad3a1
         android:fontFamily="@font/alegreya_sans_sc_light"
         android:onClick="uploadImage"
         android:text="Submit Image"
         android:textStyle="bold"
+        android:layout_marginBottom="28dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="8dp" />
 
     <Button
@@ -51,6 +59,7 @@
         android:onClick="joinParty"
         android:text="Join Party"
         android:textStyle="bold"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bt_makeparty"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +75,8 @@
         android:layout_marginTop="130dp"
         android:fontFamily="@font/roboto_light"
         android:hint="Lobby Name"
+        android:gravity="center"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,6 +92,7 @@
         android:fontFamily="@font/roboto_light"
         android:text="You have   coins."
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/et_lobby"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

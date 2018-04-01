@@ -3,6 +3,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wood_background"
     tools:context="com.company.lahacks.lahacks2018.GalleryActivity">
 
     <android.support.v7.widget.RecyclerView
@@ -16,18 +17,22 @@
         android:id="@+id/bt_submit"
         android:layout_width="229dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="submitPhotos"
+        android:background="@color/colorPrimary"
         android:text="Submit" />
 
     <Button
         android:id="@+id/bt_report"
         android:layout_width="63dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:onClick="reportPhotos"
         android:text="Report"
+        android:background="@color/colorPrimary"
         android:textSize="10sp" />
 </RelativeLayout>
