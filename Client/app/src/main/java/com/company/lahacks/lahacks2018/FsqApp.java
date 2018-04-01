@@ -30,49 +30,44 @@ public class FsqApp {
     }
     private ArrayList<FsqVenue> getNearby(double latitude, double longitude) throws Exception {
         ArrayList<FsqVenue> venueList = new ArrayList<>();
-        try {
-            String v = msToString(System.currentTimeMillis());
-            String ll = String.valueOf(latitude) + "," + String.valueOf(longitude);
-            URL url = new URL(API_URL + "/venues/suggestedcompletion?ll=" + ll + mParams + mAccessToken + "&v=" + v);
+        String v = msToString(System.currentTimeMillis());
+        String ll = String.valueOf(latitude) + "," + String.valueOf(longitude);
+        URL url = new URL(API_URL + "/venues/suggestedcompletion?ll=" + ll + mParams + mAccessToken + "&v=" + v);
 
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setDoInput(true);
+        urlConnection.setRequestMethod("GET");
+        urlConnection.setDoInput(true);
 
-            urlConnection.connect();
+        urlConnection.connect();
 
-            String response = streamToString(urlConnection.getInputStream());
-            JSONObject jsonObj = (JSONObject) new JSONTokener(response).nextValue();
-            JSONArray groups = jsonObj.getJSONObject("response").getJSONArray("minivenues");
-            int length = groups.length();
+        String response = streamToString(urlConnection.getInputStream());
+        JSONObject jsonObj = (JSONObject) new JSONTokener(response).nextValue();
+        JSONArray groups = jsonObj.getJSONObject("response").getJSONArray("minivenues");
+        int length = groups.length();
 
-            if (length > 0) {
-                for (int i = 0; i < length; i++) {
-                    JSONObject group = groups.getJSONObject(i);
-                    FsqVenue venue = new FsqVenue();
-                    venue.id = group.getString("id");
-                    venue.name = group.getString("name");
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                JSONObject group = groups.getJSONObject(i);
+                FsqVenue venue = new FsqVenue();
+                venue.id = group.getString("id");
+                venue.name = group.getString("name");
 
-                    JSONObject location = group.getJSONObject("location");
-                    Location loc = new Location(LocationManager.GPS_PROVIDER);
-                    loc.setLatitude(Double.valueOf(location.getString("lat")));
-                    loc.setLongitude(Double.valueOf(location.getString("lng")));
-                    venue.location = loc;
+                JSONObject location = group.getJSONObject("location");
+                Location loc = new Location(LocationManager.GPS_PROVIDER);
+                loc.setLatitude(Double.valueOf(location.getString("lat")));
+                loc.setLongitude(Double.valueOf(location.getString("lng")));
+                venue.location = loc;
 
-                    venue.address = location.getString("address");
+                venue.address = location.getString("address");
 
-                    JSONArray categories = group.getJSONArray("categories");
-                    int ilength = categories.length();
-                    if (length > 0) {
-                        JSONObject category_type = categories.getJSONObject(0);
-                        venue.type = category_type.getString("Name");
-                    }
-                    venueList.add(venue);
-                }
+                JSONArray categories = group.getJSONArray("categories");
+
+                JSONObject category_type = categories.getJSONObject(0);
+                venue.type = category_type.getString("Name");
+
+                venueList.add(venue);
             }
-        } catch (Exception ex) {
-            throw ex;
         }
         return venueList;
     }
