@@ -113,11 +113,14 @@ public class HostActivity extends AppCompatActivity {
                     }
                 }
 
-                Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                currDistance = currDistance * 1000;
+                String distance = Integer.toString(currDistance);
+
+                Intent intent = new Intent(view.getContext(), RestaurantsActivity.class);
                 intent.putExtra("keyWord", keyWord);
-                intent.putExtra("lat", lat);
-                intent.putExtra("lon", lon);
-                intent.putExtra("currDistance", currDistance);
+                intent.putExtra("lat", 34.0635);
+                intent.putExtra("lon", -118.4455);
+                intent.putExtra("distance", distance);
                 startActivity(intent);
 
             }

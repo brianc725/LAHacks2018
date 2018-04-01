@@ -34,6 +34,9 @@ public class RestaurantsActivity extends AppCompatActivity {
         mVenueList = new ArrayList<>();
 
         loadNearby(mLat, mLong);
+
+        int a = 1;
+        int c = a;
     }
 
     private void setParams() {
@@ -41,10 +44,10 @@ public class RestaurantsActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         int what = 0;
         try {
-            mQuery = extras.getString("EXTRA_QUERY");
-            mDistance = extras.getString("EXTRA_DISTANCE");
-            mLat = extras.getDouble("EXTRA_LAT");
-            mLong = extras.getDouble("EXTRA_LONG");
+            mQuery = extras.getString("keyWord");
+            mDistance = extras.getString("distance");
+            mLat = extras.getDouble("lat");
+            mLong = extras.getDouble("lon");
         } catch (Throwable e) {
             what = 1;
         }
