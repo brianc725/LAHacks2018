@@ -36,7 +36,7 @@ public class HostActivity extends AppCompatActivity {
     private static String keyWord;
     private double lat;
     private double lon;
-    private int currDistance = 0;
+    private int currDistance = 20;
 
 
     private String crash;
@@ -73,7 +73,7 @@ public class HostActivity extends AppCompatActivity {
         //Set the maximum distance seekbar
         distanceSeekBar = (SeekBar) findViewById(R.id.sb_distance);
         distanceSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChangedValue = 0;
+            int progressChangedValue = 20;
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChangedValue = progress;

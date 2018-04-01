@@ -226,7 +226,7 @@ public class RestaurantsActivity extends AppCompatActivity {
     });
 
     private void rFinish() {
-        Intent intent = new Intent(this, HostClientActivity.class);
+        Intent intent = new Intent(this, Finish.class);
         intent.putExtra("lobbyName", lobbyName);
         startActivity(intent);
     }

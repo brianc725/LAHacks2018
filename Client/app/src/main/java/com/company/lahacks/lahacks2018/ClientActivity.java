@@ -1,5 +1,6 @@
 package com.company.lahacks.lahacks2018;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,7 +44,13 @@ public class ClientActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                restaurant = dataSnapshot.child("parties").child(lobbyName).child("Final Restaurant").getValue().toString();
+                Object tempVal = dataSnapshot.child("parties").child(lobbyName).child("Final Restaurant").getValue();
+                if(tempVal != null) {
+                    restaurant = tempVal.toString();
+                } else {
+                    restaurant = "";
+                    cFinish();
+                }
                 finalname.setText(restaurant);
             }
 
@@ -53,5 +60,10 @@ public class ClientActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void cFinish() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
     }
