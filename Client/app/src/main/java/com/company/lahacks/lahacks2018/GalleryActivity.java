@@ -100,6 +100,7 @@ public class GalleryActivity extends AppCompatActivity {
 //                } else {
 //                    url = newURL;
 //                }
+                //FIX LAG LATER
                 if(position != RecyclerView.NO_POSITION) {
                     if(changed[position]) {
                         Glide.with(mContext)
@@ -131,8 +132,15 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
     public void submitPhotos(View view) {
-        //do some submitting magic here
-        //
+        //do some submitting magic here with tempArr
+        int[] tempArr = new int[6];
+        for (int i = 0; i < 6; i++) {
+            if(changed[i]) {
+                tempArr[i] = 1;
+            } else {
+                tempArr[i] = 0;
+            }
+        }
 
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
