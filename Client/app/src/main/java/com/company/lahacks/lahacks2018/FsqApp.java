@@ -32,7 +32,7 @@ public class FsqApp {
         ArrayList<FsqVenue> venueList = new ArrayList<>();
         String v = msToString(System.currentTimeMillis());
         String ll = String.valueOf(latitude) + "," + String.valueOf(longitude);
-        URL url = new URL(API_URL + "/venues/suggestedcompletion?ll=" + ll + mParams + mAccessToken + "&v=" + v);
+        URL url = new URL(API_URL + "/venues/suggestcompletion?ll=" + ll + mParams + mAccessToken + "&v=" + v);
 
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -59,12 +59,14 @@ public class FsqApp {
                 loc.setLongitude(Double.valueOf(location.getString("lng")));
                 venue.location = loc;
 
-                venue.address = location.getString("address");
+
+                //TODO: Fix this
+               // venue.address = location.getString("address");
 
                 JSONArray categories = group.getJSONArray("categories");
 
-                JSONObject category_type = categories.getJSONObject(0);
-                venue.type = category_type.getString("Name");
+//                JSONObject category_type = categories.getJSONObject(0);
+  //              venue.type = category_type.getString("name");
 
                 venueList.add(venue);
             }
