@@ -1,5 +1,6 @@
 package com.company.lahacks.lahacks2018;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,5 +54,11 @@ public class HostClientActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void finish() {
+        myRef.child("parties").child(lobbyName).removeValue();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 }

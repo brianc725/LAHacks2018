@@ -192,7 +192,7 @@ public class RestaurantsActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 myRef.child("parties").child(lobbyName).child("Final Restaurant").setValue(venues.get(position).name);
-                                //finish();
+                                rFinish();
                             }
 
                             @Override
@@ -225,9 +225,8 @@ public class RestaurantsActivity extends AppCompatActivity {
         }
     });
 
-    public void finish(){
-        myRef.child("parties").child(lobbyName).removeValue();
-        Intent intent = new Intent(this, HomeActivity.class);
+    private void rFinish() {
+        Intent intent = new Intent(this, HostClientActivity.class);
         startActivity(intent);
     }
 }
