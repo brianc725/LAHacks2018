@@ -13,7 +13,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import jp.wasabeef.glide.transformations.gpu.SwirlFilterTransformation;
 
@@ -23,7 +22,7 @@ public class GalleryActivity extends AppCompatActivity {
 
     private String[] mUrls;
     private String newURL = "https://upload.wikimedia.org/wikipedia/en/c/c7/Bonobos_Lana_%26_Kesi_2006_CALVIN_IMG_1301.JPG";
-    private boolean[] changed = new boolean[6];
+    private int[] mValues = new int[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class GalleryActivity extends AppCompatActivity {
         mUrls = extras.getStringArray("mUrls");
 
         for (int i = 0; i < 6; i++) {
-            changed[i] = false;
+            mValues[i] = 0;
         }
 
         super.onCreate(savedInstanceState);
@@ -79,7 +78,7 @@ public class GalleryActivity extends AppCompatActivity {
             return (mPhotos.length);
         }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public class MyViewHolder extends RecyclerView.ViewHolder {
 
             public ImageView mPhotoImageView;
 
@@ -87,35 +86,54 @@ public class GalleryActivity extends AppCompatActivity {
 
                 super(itemView);
                 mPhotoImageView = (ImageView) itemView.findViewById(R.id.iv_photo);
-                itemView.setOnClickListener(this);
-            }
-
-            @Override
-            public void onClick(View view) {
-                int position = getAdapterPosition();
-                String url;
-                url = mUrls[position];
-//                if (changed[position]) {
-//                    url = mUrls[position];
-//                } else {
-//                    url = newURL;
-//                }
-                //FIX LAG LATER
-                if(position != RecyclerView.NO_POSITION) {
-                    if(changed[position]) {
-                        Glide.with(mContext)
-                                .load(url)
-//                    .placeholder(R.drawable.ic_cloud_off_red)
-                                .into(mPhotoImageView);
-                    } else {
-                        Glide.with(mContext)
-                                .load(url)
-//                    .placeholder(R.drawable.ic_cloud_off_red)
-                                .apply(bitmapTransform(new GrayscaleTransformation()))
-                                .into(mPhotoImageView);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        int position = getAdapterPosition();
+                        String url;
+                        url = mUrls[position];
+                        //FIX LAG LATER
+                        if(position != RecyclerView.NO_POSITION) {
+                            if(mValues[position] > 0) {
+                                Glide.with(mContext)
+                                        .load(url)
+//                                      .placeholder(R.drawable.ic_cloud_off_red)
+                                        .into(mPhotoImageView);
+                                mValues[position] = 0;
+                            } else {
+                                Glide.with(mContext)
+                                        .load(url)
+//                                      .placeholder(R.drawable.ic_cloud_off_red)
+                                        .apply(bitmapTransform(new GrayscaleTransformation()))
+                                        .into(mPhotoImageView);
+                                mValues[position] = 1;
+                            }
+                        }
                     }
-                    changed[position] = !changed[position];
-                }
+                });
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    public boolean onLongClick(View view) {
+                        int position = getAdapterPosition();
+                        String url;
+                        url = mUrls[position];
+                        if(position != RecyclerView.NO_POSITION) {
+                            if(mValues[position] > 0) {
+                                Glide.with(mContext)
+                                        .load(url)
+//                                      .placeholder(R.drawable.ic_cloud_off_red)
+                                        .into(mPhotoImageView);
+                                mValues[position] = 0;
+                            } else {
+                                Glide.with(mContext)
+                                        .load(url)
+//                                      .placeholder(R.drawable.ic_cloud_off_red)
+                                        .apply(bitmapTransform(new SwirlFilterTransformation()))
+                                        .into(mPhotoImageView);
+                                mValues[position] = 2;
+                            }
+                        }
+                        return true;
+                    }
+                });
             }
         }
 
@@ -132,15 +150,7 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
     public void submitPhotos(View view) {
-        //do some submitting magic here with tempArr
-        int[] tempArr = new int[6];
-        for (int i = 0; i < 6; i++) {
-            if(changed[i]) {
-                tempArr[i] = 1;
-            } else {
-                tempArr[i] = 0;
-            }
-        }
+        //do some submitting magic here with mValues
 
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
