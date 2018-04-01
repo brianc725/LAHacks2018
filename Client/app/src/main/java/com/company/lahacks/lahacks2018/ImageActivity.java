@@ -21,6 +21,7 @@ public class ImageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent galleryIntent = new Intent(ImageActivity.this, GalleryActivity.class);
                 galleryIntent.putExtra("mUrls",getIntent().getExtras().getStringArray("mUrl"));
+                galleryIntent.putExtra("isHost",getIntent().getExtras().getBoolean("isHost"));
                 startActivity(galleryIntent);
             }
         });

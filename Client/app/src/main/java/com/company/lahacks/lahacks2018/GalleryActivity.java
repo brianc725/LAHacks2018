@@ -21,6 +21,7 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 public class GalleryActivity extends AppCompatActivity {
 
     private String[] mUrls;
+    private boolean isHost;
     private String newURL = "https://upload.wikimedia.org/wikipedia/en/c/c7/Bonobos_Lana_%26_Kesi_2006_CALVIN_IMG_1301.JPG";
     private int[] mValues = new int[6];
 
@@ -28,6 +29,7 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
         mUrls = extras.getStringArray("mUrls");
+        isHost = extras.getBoolean("isHost");
 
         for (int i = 0; i < 6; i++) {
             mValues[i] = 0;
