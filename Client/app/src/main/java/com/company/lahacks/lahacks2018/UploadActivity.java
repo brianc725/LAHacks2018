@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -27,6 +29,9 @@ public class UploadActivity extends AppCompatActivity {
 
     private StorageReference mStorageRef;
 
+    private FirebaseDatabase database;
+    private DatabaseReference foodRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,9 @@ public class UploadActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.iv_userimage);
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        database = FirebaseDatabase.getInstance();
+        foodRef = database.getReference().child("food");
 
     }
 
@@ -80,6 +88,18 @@ public class UploadActivity extends AppCompatActivity {
 
                 Toast.makeText(UploadActivity.this, "Photo successfully uploaded.",
                         Toast.LENGTH_SHORT).show();
+
+                String foodname;
+                String foodlink;
+
+                // TODO: Google Cloud Vision the food item here
+
+                foodname = "tomato"; //temporary
+
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                foodlink = downloadUrl.toString();
+
+                foodRef.child(foodname).setValue(foodlink);
             }
         })
         .addOnFailureListener(new OnFailureListener() {
