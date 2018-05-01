@@ -34,4 +34,5 @@ We plan to use Google Cloud Vision for the user submitted photos to automaticall
 
 ## Devpost
 
-https://devpost.com/software/pic-it/edit
+https://devpost.com/software/pic-it
+
